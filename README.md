@@ -26,7 +26,7 @@ Add `hier-set` to the `:dependencies` list in your
 [Leiningen](https://github.com/technomancy/leiningen) `project.clj`:
 
 ```clj
-[hier-set "1.1.2"]
+[com.nedap.staffing-solutions/hier-set "1.1.2"]
 ```
 
 Primary usage is then through the `hier-set` and `hier-set-by` constructor
@@ -60,5 +60,6 @@ A trivial example:
 
 Copyright © 2012, 2014 Marshall Bockrath-Vandegrift.
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Copyright © 2020- Nedap.
+
+This program and the accompanying materials are made available under the terms of the [Eclipse Public License 2.0](https://www.eclipse.org/legal/epl-2.0).
