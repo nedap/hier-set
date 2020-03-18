@@ -1,16 +1,16 @@
 (ns hier-set.core-test
-  (:require [hier-set.core :as hs])
-  (:use [hier-set.core :only [hier-set hier-set-by]])
-  (:use [clojure.test]))
+  (:require
+   [clojure.test :refer [deftest is testing]]
+   [hier-set.core :as hier-set :refer [hier-set hier-set-by]]
+   [nedap.speced.def :as speced]))
 
-(defn with-starts?
+(speced/defn with-starts?
   "Does string s begin with the provided prefix?"
-  {:inline (fn [prefix s & to]
-             `(let [^String s# ~s, ^String prefix# ~prefix]
-                (.startsWith s# prefix# ~@(when (seq to) [`(int ~@to)]))))
-   :inline-arities #{2 3}}
-  ([prefix s] (.startsWith ^String s ^String prefix))
-  ([prefix s to] (.startsWith ^String s ^String prefix (int to))))
+  ([^String prefix, ^String s]
+   (-> s (.startsWith prefix)))
+
+  ([^String prefix, ^String s, to]
+   (-> s (.startsWith prefix (int to)))))
 
 (deftest test-fundamental
   (let [hs (hier-set with-starts?)]
@@ -31,13 +31,13 @@
         (is (= '("foo") (hs "foo.baz")))
         (is (= '("foo.bar" "foo") (hs "foo.bar.bar"))))
       (testing "using `ancestors`"
-        (is (= '() (hs/ancestors hs "bar")))
-        (is (= '("foo") (hs/ancestors hs "foo.baz")))
-        (is (= '("foo.bar" "foo") (hs/ancestors hs "foo.bar.bar")))))
+        (is (= '() (hier-set/ancestors hs "bar")))
+        (is (= '("foo") (hier-set/ancestors hs "foo.baz")))
+        (is (= '("foo.bar" "foo") (hier-set/ancestors hs "foo.bar.bar")))))
     (testing "Able to retrieve descendant primary elements"
       (testing "using `descendants`"
-        (is (= '() (hs/descendants hs "bar")))
-        (is (= '("foo.bar" "foo.bar.baz") (hs/descendants hs "foo.bar")))))))
+        (is (= '() (hier-set/descendants hs "bar")))
+        (is (= '("foo.bar" "foo.bar.baz") (hier-set/descendants hs "foo.bar")))))))
 
 (def ^:private testing-data
   ["adam" "adam.nested" "adam.nested.deeply"

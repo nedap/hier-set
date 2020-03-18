@@ -1,7 +1,8 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
 (defproject com.nedap.staffing-solutions/hier-set "1.1.2"
   ;; Please keep the dependencies sorted a-z.
-  :dependencies [[org.clojure/clojure "1.10.1"]]
+  :dependencies [[com.nedap.staffing-solutions/speced.def "2.0.0"]
+                 [org.clojure/clojure "1.10.1"]]
 
   :exclusions [org.clojure/clojurescript]
 

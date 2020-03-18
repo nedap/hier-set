@@ -1,9 +1,9 @@
 (ns hier-set.core
   "Provides a 'hierarchical set' data structure.  See `hier-set` for details."
-  (:refer-clojure :exclude [descendants ancestors])
-  (:import [java.util Set])
-  (:import [clojure.lang IFn ILookup IObj IPersistentCollection IPersistentSet
-                         PersistentTreeSet Seqable Sorted]))
+  (:refer-clojure :exclude [ancestors descendants parents])
+  (:import
+   (clojure.lang IFn IObj IPersistentCollection IPersistentSet PersistentTreeSet Seqable Sorted)
+   (java.util Set)))
 
 (defprotocol Hierarchical
   "Operations on collections defining hierarchical relationships."
@@ -90,7 +90,7 @@ include `key` if `strict?` is true, defaulting to false."))
   (size [this] (.size contents))
   (toArray [this] (.toArray contents))
   (^"[Ljava.lang.Object;" toArray [this ^"[Ljava.lang.Object;" arr]
-   (.toArray contents arr))
+    (.toArray contents arr))
 
   Sorted
   (comparator [this] (.comparator contents))
