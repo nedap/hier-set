@@ -26,7 +26,7 @@ Add `hier-set` to the `:dependencies` list in your
 [Leiningen](https://github.com/technomancy/leiningen) `project.clj`:
 
 ```clj
-[com.nedap.staffing-solutions/hier-set "1.1.2"]
+[com.nedap.staffing-solutions/hier-set "1.1.3"]
 ```
 
 Primary usage is then through the `hier-set` and `hier-set-by` constructor
